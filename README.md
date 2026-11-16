@@ -106,13 +106,28 @@
 
 ## 🚀 快速安装与使用
 
-### 1. 加载插件
+### 1. 安装插件
 
-在启动 Claude Code 时直接挂载插件目录：
+**从 GitHub 一键安装（Claude Code ≥ 2.1.275）：**
+
+```text
+/plugin install better-code --marketplace bb-boy680/better-code
+```
+
+也可以在会话中分两步添加 marketplace 再安装：
+
+```text
+/plugin marketplace add bb-boy680/better-code
+/plugin install better-code@better-code
+```
+
+**本地开发调试：** 直接挂载插件目录：
 
 ```bash
 claude --plugin-dir /path/to/better-code
 ```
+
+安装后，技能以 `better-code:<skill>` 的形式出现，例如 `/better-code:code-review`；模型也会按 `description` 自动触发。
 
 *(你也可以将 `AGENTS.md` / `CLAUDE.md` 中的工程规则合并到你项目的根目录说明中，以激活自动会话记忆与只读归档保护。)*
 
