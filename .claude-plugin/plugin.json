@@ -1,0 +1,21 @@
+{
+  "name": "better-code",
+  "version": "0.1.0",
+  "description": "面向 Claude Code 的高内聚工程工作流技能包：深度调研（research）、头脑风暴与决策树追问（spark）、计划编写（create-plan）、计划审核（plan-review）、高内聚设计落地（better-code）、实证调试修复（debug-fixer）、代码审查（code-review）、任务收尾归档（wrap）与跨会话工程记忆（doc-memory）。",
+  "author": {
+    "name": "黑黑的脸蛋"
+  },
+  "keywords": [
+    "skills",
+    "workflow",
+    "research",
+    "spark",
+    "create-plan",
+    "plan-review",
+    "better-code",
+    "debug-fixer",
+    "code-review",
+    "wrap",
+    "doc-memory"
+  ]
+}
