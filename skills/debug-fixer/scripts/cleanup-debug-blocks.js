@@ -4,7 +4,46 @@ import fs from "node:fs";
 import path from "node:path";
 
 function usage() {
-  console.error("Usage: node cleanup-debug-blocks.js --session-id <id> --files <file...> [--log-file <path>] [--dry-run]");
+  console.error("Usage: node cleanup-debug-blocks.js --session-id <id> [--files <file...>] [--log-file <path>] [--dry-run]");
+  console.error("  --files omitted: scan the current working directory recursively.");
+}
+
+const SCAN_EXTENSIONS = new Set([".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".mts", ".cts", ".vue", ".svelte", ".py", ".go", ".java", ".kt", ".rs", ".php", ".rb", ".cs", ".swift"]);
+const SKIP_DIRS = new Set([".git", "node_modules", ".debug", "dist", "build", "out", "target", "vendor", "__pycache__", ".next", ".nuxt", "coverage"]);
+
+function findDebugBlocks(dir, sessionId) {
+  const hits = [];
+
+  const walk = (current) => {
+    let entries;
+    try {
+      entries = fs.readdirSync(current, { withFileTypes: true });
+    } catch {
+      return;
+    }
+
+    for (const entry of entries) {
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        if (!SKIP_DIRS.has(entry.name)) walk(full);
+        continue;
+      }
+      if (!entry.isFile() || !SCAN_EXTENSIONS.has(path.extname(entry.name))) continue;
+
+      let content;
+      try {
+        content = fs.readFileSync(full, "utf8");
+      } catch {
+        continue;
+      }
+      if (content.includes("#region DEBUG") && content.includes(`sessionId: ${sessionId}`)) {
+        hits.push(full);
+      }
+    }
+  };
+
+  walk(dir);
+  return hits;
 }
 
 function parseArgs(argv) {
@@ -27,7 +66,7 @@ function parseArgs(argv) {
     }
   }
 
-  if (!args.sessionId || args.files.length === 0) {
+  if (!args.sessionId) {
     usage();
     process.exit(2);
   }
@@ -102,7 +141,8 @@ function removeEmptyDebugDirs(logFilePath) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
-  const files = args.files.map((file) => cleanupFile(file, args.sessionId, args.dryRun));
+  const targets = args.files.length > 0 ? args.files : findDebugBlocks(process.cwd(), args.sessionId);
+  const files = targets.map((file) => cleanupFile(file, args.sessionId, args.dryRun));
   let deletedLog = false;
 
   const logFile = args.logFile || path.join(".debug", "logs", `${args.sessionId}.log`);

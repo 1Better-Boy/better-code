@@ -1,7 +1,7 @@
 /**
  * Debugger Server - 接收前端埋点 HTTP POST 请求并追加写入项目本地 .debug/logs/{sessionId}.log
  * pwd 通过请求体传递，单实例可服务任意项目
- * 监听地址: 127.0.0.1:9220
+ * 监听地址: 127.0.0.1:9220（可用环境变量 DEBUG_PORT 覆盖）
  *
  * 启动: node debugger-server.js
  * 健康检查: curl http://127.0.0.1:9220/health
@@ -12,7 +12,7 @@ import path from "node:path";
 import fs from "node:fs";
 
 const HOST = "127.0.0.1";
-const PORT = 9220;
+const PORT = Number(process.env.DEBUG_PORT) || 9220;
 const MAX_BODY_BYTES = 2 * 1024 * 1024; // 2MB
 
 function parseBody(req) {
