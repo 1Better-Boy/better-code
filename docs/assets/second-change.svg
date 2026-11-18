@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" font-family="'PingFang SC','Noto Sans SC','Source Han Sans SC','Microsoft YaHei','Hiragino Sans GB',sans-serif">
+  <title>同一个需求，第二次交付：没有工程约束时要改 5 个文件并复制权限校验，使用 better-code 时只需新增 1 个格式文件并改 1 行注册</title>
+  <rect width="1200" height="600" fill="#F7F5F0"/>
+
+  <text x="64" y="62" font-size="15" letter-spacing="2" fill="#9A9EA5" font-family="'SF Mono',Consolas,monospace">示例 · 报表导出模块</text>
+  <text x="64" y="116" font-size="42" font-weight="700" fill="#24272B">同一个需求，第二次交付</text>
+  <text x="64" y="156" font-size="19" fill="#5A6069">已经支持 CSV 导出，现在要加 JSON。两种写法，第二次改动差在这里。</text>
+
+  <!-- 左：没有工程约束 -->
+  <rect x="64" y="192" width="512" height="290" rx="16" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+  <rect x="88" y="214" width="146" height="32" rx="8" fill="#F7E6DF"/>
+  <text x="161" y="236" font-size="15" font-weight="600" fill="#B4633F" text-anchor="middle">没有工程约束</text>
+
+  <rect x="88" y="262" width="464" height="34" rx="8" fill="#FDFBF7" stroke="#EFE9DF"/>
+  <circle cx="104" cy="279" r="3.5" fill="#C97C5D"/>
+  <text x="118" y="284" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">export-report.ts</text>
+  <text x="540" y="284" font-size="15" fill="#9C8F86" text-anchor="end">加 JSON 分支</text>
+
+  <rect x="88" y="304" width="464" height="34" rx="8" fill="#FDFBF7" stroke="#EFE9DF"/>
+  <circle cx="104" cy="321" r="3.5" fill="#C97C5D"/>
+  <text x="118" y="326" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">formats/csv.ts</text>
+  <text x="540" y="326" font-size="15" fill="#9C8F86" text-anchor="end">复制后改成 json</text>
+
+  <rect x="88" y="346" width="464" height="34" rx="8" fill="#FDFBF7" stroke="#EFE9DF"/>
+  <circle cx="104" cy="363" r="3.5" fill="#C97C5D"/>
+  <text x="118" y="368" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">report-controller.ts</text>
+  <text x="540" y="368" font-size="15" fill="#9C8F86" text-anchor="end">改状态与清理</text>
+
+  <rect x="88" y="388" width="464" height="34" rx="8" fill="#FDFBF7" stroke="#EFE9DF"/>
+  <circle cx="104" cy="405" r="3.5" fill="#C97C5D"/>
+  <text x="118" y="410" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">export-button.ts</text>
+  <text x="540" y="410" font-size="15" fill="#9C8F86" text-anchor="end">改 loading 与禁用</text>
+
+  <rect x="88" y="430" width="464" height="34" rx="8" fill="#FDFBF7" stroke="#EFE9DF"/>
+  <circle cx="104" cy="447" r="3.5" fill="#C97C5D"/>
+  <text x="118" y="452" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">export-api.ts</text>
+  <text x="540" y="452" font-size="15" fill="#9C8F86" text-anchor="end">加一条权限判断</text>
+
+  <!-- 右：better-code -->
+  <rect x="624" y="192" width="512" height="290" rx="16" fill="#FFFFFF" stroke="#C8DCD5" stroke-width="1.5"/>
+  <rect x="648" y="214" width="130" height="32" rx="8" fill="#DFEDE8"/>
+  <text x="713" y="236" font-size="15" font-weight="600" fill="#1F5F58" text-anchor="middle">better-code</text>
+
+  <rect x="648" y="262" width="464" height="34" rx="8" fill="#F7FBF9" stroke="#DCEAE4"/>
+  <circle cx="664" cy="279" r="3.5" fill="#287D75"/>
+  <text x="678" y="284" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">formats/json.ts</text>
+  <text x="1100" y="284" font-size="15" fill="#7E9A93" text-anchor="end">新增</text>
+
+  <rect x="648" y="304" width="464" height="34" rx="8" fill="#F7FBF9" stroke="#DCEAE4"/>
+  <circle cx="664" cy="321" r="3.5" fill="#287D75"/>
+  <text x="678" y="326" font-size="15" fill="#24272B" font-family="'SF Mono',Consolas,monospace">export-report.ts</text>
+  <text x="1100" y="326" font-size="15" fill="#7E9A93" text-anchor="end">注册 1 行</text>
+
+  <text x="662" y="382" font-size="16" fill="#5A6069">导出用例、状态与清理逻辑全部复用。</text>
+  <text x="662" y="408" font-size="16" fill="#5A6069">调用方不需要知道多了一种格式。</text>
+
+  <text x="64" y="520" font-size="20" font-weight="700" fill="#B4633F">改动散落在多处，规则被复制一份</text>
+  <text x="624" y="520" font-size="20" font-weight="700" fill="#1F5F58">新增 1 个文件，改 1 行注册</text>
+
+  <text x="64" y="566" font-size="22" font-weight="600" fill="#24272B">第二次改动落在哪里，由第一次的写法决定。</text>
+</svg>

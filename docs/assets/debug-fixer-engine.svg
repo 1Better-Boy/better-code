@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" font-family="'PingFang SC','Noto Sans SC','Source Han Sans SC','Microsoft YaHei','Hiragino Sans GB',sans-serif">
+  <title>debug-fixer 的运行时证据路径：先埋点采集日志，再定位偏差源头；若判定为结构问题则清理埋点并转入 create-plan</title>
+  <rect width="1200" height="560" fill="#F7F5F0"/>
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#287D75"/>
+    </marker>
+    <marker id="arwo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C97C5D"/>
+    </marker>
+  </defs>
+
+  <text x="64" y="58" font-size="30" font-weight="700" fill="#24272B" font-family="'SF Mono',Consolas,monospace">debug-fixer</text>
+  <text x="64" y="92" font-size="19" fill="#5A6069">先拿到运行时证据，再决定改哪里</text>
+
+  <!-- 结构问题上分支 -->
+  <rect x="440" y="126" width="200" height="58" rx="10" fill="#FFFFFF" stroke="#E9CFC2" stroke-width="1.5"/>
+  <text x="540" y="162" font-size="16" font-weight="600" fill="#B4633F" text-anchor="middle">判定为结构问题</text>
+
+  <rect x="680" y="126" width="180" height="58" rx="10" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+  <text x="770" y="162" font-size="16" fill="#24272B" text-anchor="middle">清理埋点</text>
+
+  <rect x="900" y="126" width="236" height="58" rx="10" fill="#FFFFFF" stroke="#C8DCD5" stroke-width="1.5"/>
+  <text x="1018" y="162" font-size="16" font-weight="600" fill="#1F5F58" text-anchor="middle" font-family="'SF Mono',Consolas,monospace">create-plan</text>
+
+  <path d="M640 155 H672" stroke="#C97C5D" stroke-width="2" fill="none" marker-end="url(#arwo)"/>
+  <path d="M860 155 H892" stroke="#C97C5D" stroke-width="2" fill="none" marker-end="url(#arwo)"/>
+
+  <!-- 主链六步 -->
+  <g>
+    <rect x="64" y="238" width="150" height="86" rx="12" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+    <text x="139" y="286" font-size="17" font-weight="600" fill="#24272B" text-anchor="middle">扫描</text>
+    <text x="139" y="308" font-size="15" fill="#9A9EA5" text-anchor="middle">确定可疑范围</text>
+
+    <rect x="248" y="238" width="150" height="86" rx="12" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+    <text x="323" y="286" font-size="17" font-weight="600" fill="#24272B" text-anchor="middle">取证</text>
+    <text x="323" y="308" font-size="15" fill="#9A9EA5" text-anchor="middle">写入日志文件</text>
+
+    <rect x="432" y="238" width="150" height="86" rx="12" fill="#FFFFFF" stroke="#C8DCD5" stroke-width="2"/>
+    <text x="507" y="286" font-size="17" font-weight="700" fill="#1F5F58" text-anchor="middle">定位</text>
+    <text x="507" y="308" font-size="15" fill="#7E9A93" text-anchor="middle">比对偏差源头</text>
+
+    <rect x="616" y="238" width="150" height="86" rx="12" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+    <text x="691" y="286" font-size="17" font-weight="600" fill="#24272B" text-anchor="middle">修复</text>
+    <text x="691" y="308" font-size="15" fill="#9A9EA5" text-anchor="middle">改根因那一处</text>
+
+    <rect x="800" y="238" width="150" height="86" rx="12" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+    <text x="875" y="286" font-size="17" font-weight="600" fill="#24272B" text-anchor="middle">验证</text>
+    <text x="875" y="308" font-size="15" fill="#9A9EA5" text-anchor="middle">复现用例转通过</text>
+
+    <rect x="984" y="238" width="152" height="86" rx="12" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+    <text x="1060" y="286" font-size="17" font-weight="600" fill="#24272B" text-anchor="middle">清理</text>
+    <text x="1060" y="308" font-size="15" fill="#9A9EA5" text-anchor="middle">移除临时埋点</text>
+  </g>
+
+  <g stroke="#287D75" stroke-width="2" fill="none">
+    <path d="M218 281 H240" marker-end="url(#arw)"/>
+    <path d="M402 281 H424" marker-end="url(#arw)"/>
+    <path d="M586 281 H608" marker-end="url(#arw)"/>
+    <path d="M770 281 H792" marker-end="url(#arw)"/>
+    <path d="M954 281 H976" marker-end="url(#arw)"/>
+  </g>
+
+  <!-- 定位向上 -->
+  <path d="M507 238 V192" stroke="#C97C5D" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arwo)"/>
+
+  <!-- 日志汇入 -->
+  <rect x="64" y="386" width="180" height="48" rx="10" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+  <text x="154" y="416" font-size="15" fill="#24272B" text-anchor="middle">服务端进程</text>
+
+  <rect x="64" y="446" width="180" height="48" rx="10" fill="#FFFFFF" stroke="#E4DED4" stroke-width="1.5"/>
+  <text x="154" y="476" font-size="15" fill="#24272B" text-anchor="middle">浏览器 / 客户端</text>
+
+  <rect x="284" y="396" width="150" height="90" rx="10" fill="#FDFBF7" stroke="#E4DED4" stroke-width="1.5"/>
+  <text x="359" y="434" font-size="15" font-weight="600" fill="#24272B" text-anchor="middle">.debug/logs/</text>
+  <text x="359" y="456" font-size="15" fill="#9A9EA5" text-anchor="middle">本地文件，可回溯</text>
+
+  <path d="M244 410 H284" stroke="#287D75" stroke-width="1.6" fill="none" marker-end="url(#arw)"/>
+  <path d="M244 470 H284" stroke="#287D75" stroke-width="1.6" fill="none" marker-end="url(#arw)"/>
+  <path d="M434 424 H482 V324 H507" stroke="#287D75" stroke-width="1.8" fill="none" marker-end="url(#arw)"/>
+
+  <text x="64" y="540" font-size="16" fill="#5A6069">证据不足时不做猜测性修改；若偏差源于职责耦合或状态分裂，转 create-plan 重新拆分，而不是在旧结构上继续打补丁。</text>
+</svg>
