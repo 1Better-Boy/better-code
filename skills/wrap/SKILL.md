@@ -1,6 +1,6 @@
 ---
 name: wrap
-description: 开发任务完成后的收尾封版：归档计划文档（锁定为只读）、提交 Git commit、合并并清理 worktree。当用户要求“收尾”“完成计划”“归档计划”“提交并合并 worktree”或终检通过后封版交付时使用。代码未验证通过前不触发。
+description: 开发完成后的收尾封版：归档计划文档、提交 Git commit、合并并清理 worktree。用户说“收尾吧”“可以封版了”“归档这个计划”“提交一下”“把 worktree 合了清理掉”时触发。
 argument-hint: "[计划文档路径] [worktree路径或分支名]"
 ---
 
