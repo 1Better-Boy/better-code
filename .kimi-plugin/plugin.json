@@ -1,0 +1,15 @@
+{
+  "name": "better-code",
+  "description": "让 AI 写出更高质量的代码：高内聚工程工作流技能包。",
+  "author": {
+    "name": "黑黑的脸蛋"
+  },
+  "homepage": "https://github.com/bb-boy680/better-code",
+  "license": "MIT",
+  "interface": {
+    "displayName": "better-code",
+    "shortDescription": "让 AI 写出更高质量的代码：模块边界、职责归属、结构验证。"
+  },
+  "skills": "./skills/",
+  "systemPromptPath": "./AGENTS.md"
+}

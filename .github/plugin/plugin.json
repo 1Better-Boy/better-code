@@ -1,0 +1,13 @@
+{
+  "name": "better-code",
+  "description": "让 AI 写出更高质量的代码：高内聚工程工作流技能包。",
+  "version": "0.1.0",
+  "author": {
+    "name": "黑黑的脸蛋"
+  },
+  "homepage": "https://github.com/bb-boy680/better-code",
+  "repository": "https://github.com/bb-boy680/better-code",
+  "license": "MIT",
+  "keywords": ["skills", "workflow", "code-quality", "planning", "code-review"],
+  "skills": "skills/"
+}

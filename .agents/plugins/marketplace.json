@@ -1,0 +1,21 @@
+{
+  "name": "better-code",
+  "interface": {
+    "displayName": "better-code"
+  },
+  "plugins": [
+    {
+      "name": "better-code",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/bb-boy680/better-code.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

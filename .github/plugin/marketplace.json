@@ -1,0 +1,18 @@
+{
+  "name": "better-code",
+  "description": "让 AI 写出更高质量的代码：高内聚工程工作流技能包。",
+  "owner": {
+    "name": "bb-boy680",
+    "url": "https://github.com/bb-boy680"
+  },
+  "plugins": [
+    {
+      "name": "better-code",
+      "description": "约束模块边界、职责归属与结构验证，让 AI 写出的代码下次还改得动。",
+      "source": "./",
+      "category": "productivity",
+      "tags": ["skills", "workflow", "code-quality"],
+      "skills": "skills/"
+    }
+  ]
+}

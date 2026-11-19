@@ -1,0 +1,28 @@
+{
+  "name": "better-code",
+  "version": "0.1.0",
+  "description": "让 AI 写出更高质量的代码：高内聚工程工作流技能包，含调研、设计规格、计划编写与审核、编码、实证排障、代码审查、归档与工程记忆。",
+  "author": {
+    "name": "黑黑的脸蛋"
+  },
+  "homepage": "https://github.com/bb-boy680/better-code",
+  "repository": "https://github.com/bb-boy680/better-code",
+  "license": "MIT",
+  "keywords": ["skills", "workflow", "code-quality", "planning", "code-review", "debugging"],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "better-code",
+    "shortDescription": "让 AI 写出更高质量的代码",
+    "longDescription": "用模块边界、职责归属、类型与错误处理、能力复用、加载性能和结构验证约束 AI 的编码行为，覆盖调研、设计、计划、实现、排障、审查与归档。",
+    "developerName": "黑黑的脸蛋",
+    "category": "Productivity",
+    "capabilities": ["Instructions", "Lifecycle hooks"],
+    "websiteURL": "https://github.com/bb-boy680/better-code",
+    "defaultPrompt": [
+      "用 better-code 实现这个功能。",
+      "审查当前改动是否偏离计划。",
+      "重构这个模块，集中职责与状态。"
+    ]
+  }
+}

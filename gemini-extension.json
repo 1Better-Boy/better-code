@@ -1,0 +1,6 @@
+{
+  "name": "better-code",
+  "version": "0.1.0",
+  "description": "让 AI 写出更高质量的代码：高内聚工程工作流技能包。",
+  "contextFileName": "AGENTS.md"
+}
