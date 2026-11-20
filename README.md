@@ -2,7 +2,7 @@
 
 **让 AI 写出更高质量的代码。**
 
-better-code 是一个 Claude Code 插件。它在 Claude 动手写代码时持续施加工程约束：职责放在哪、边界划在哪、重规则只留一份、改动落在哪一层。
+better-code 是一套面向 AI Coding Agent 的工程约束与技能插件（支持 Claude Code、Codex、Cursor、Windsurf、Cline、GitHub Copilot、Gemini CLI、Kimi Code、Devin、Qoder 等）。它在 Agent 动手写代码时持续施加工程约束：职责放在哪、边界划在哪、重规则只留一份、改动落在哪一层。
 
 这里的「高质量」不是「看起来整洁」，而是可以检验的：功能是否真的做对，错误和状态有没有明确的处理人，以及**下次同类修改要动几个文件**——最后一条，是前两条能不能长期维持的证据。
 
@@ -17,9 +17,13 @@ better-code 是一个 Claude Code 插件。它在 Claude 动手写代码时持�
 - 类型声明写得很全，但业务结果和异常混在一起，调用方只能 try-catch 兜住一切；
 - 改动通过评审时没人说得清：为什么这样分层、为什么这里要拆，下次只能照抄或推翻重来。
 
-这些不是生成速度的问题，是**质量没有被约束**的问题。better-code 把这类约束写进 Claude 的工作流程，让它在动手前先确定边界，在交付前先检查下一次修改的成本。
+这些不是生成速度的问题，是**质量没有被约束**的问题。better-code 把这类约束写进 Agent 的工作流程，让它在动手前先确定边界，在交付前先检查下一次修改的成本。
 
 ## 安装
+
+`skills/` 是核心内容，仓库已为多种 Agent 提供插件清单（manifest）、SessionStart hook 和规则文件副本。
+
+### Claude Code
 
 在 Claude Code 会话中执行：
 
@@ -34,7 +38,22 @@ better-code 是一个 Claude Code 插件。它在 Claude 动手写代码时持�
 /plugin install better-code --marketplace bb-boy680/better-code
 ```
 
-安装后在任意项目里就能用，不需要改项目配置。会话内输入 `/plugin` 可管理已安装插件。
+安装后在任意项目里就能用（自动通过 `SessionStart` hook 注入常驻工程约束），不需要改项目配置。会话内输入 `/plugin` 可管理已安装插件。
+
+### Codex CLI / IDE 扩展
+
+```bash
+codex plugin marketplace add bb-boy680/better-code
+codex plugin add better-code@better-code
+```
+
+### 其他 Agent（Copilot、Gemini CLI、Kimi、Devin、Qoder、Cursor、Windsurf、Cline、Kiro 等）
+
+- **支持插件 / 扩展安装的宿主**（GitHub Copilot CLI、Gemini CLI / Qwen Code、Kimi Code、Devin CLI、Qoder、Grok Build、Goose 等）：仓库已内置对应 manifest（如 `.github/plugin/`、`gemini-extension.json`、`.kimi-plugin/`、`.devin-plugin/`、`.qoder-plugin/`、`.agents/plugins/`），可直接用宿主自带的插件命令安装。
+- **使用项目规则文件的宿主**（Cursor、Windsurf、Cline、Kiro、GitHub Copilot 仓库级指令等）：仓库已提供从 `AGENTS.md` 同步生成的规则副本（`.cursor/rules/better-code.mdc`、`.windsurf/rules/better-code.md`、`.clinerules/better-code.md`、`.kiro/steering/better-code.md`、`.github/copilot-instructions.md`），复制到目标项目对应目录即可；支持 `SKILL.md` 的宿主可同时将 `skills/` 复制到 `.agents/skills/`。
+- **其他支持 `AGENTS.md` 的 Agent**（Zed、Jules、Amp、Junie、Factory Droid 等）：将 `AGENTS.md` 放到目标项目根目录即可获得常驻约束。
+
+各宿主的完整适配文件、安装命令与能力差异见 **[安装到不同 Agent](docs/agent-portability.md)**。
 
 ## 第一次使用
 
@@ -68,7 +87,7 @@ better-code 是一个 Claude Code 插件。它在 Claude 动手写代码时持�
 
 | 适合 | 不太适合 |
 | --- | --- |
-| 用 Claude Code 写跨文件的功能或重构 | 一次性脚本、临时 demo |
+| 用 AI Coding Agent 写跨文件的功能或重构 | 一次性脚本、临时 demo |
 | 被 AI 生成的胶水代码返工过 | 只想要更快的补全速度 |
 | 需要在交付时说清「为什么这样分层」 | 已经有严格架构规范并由 CI 强制 |
 
@@ -151,12 +170,12 @@ research → spark → create-plan → plan-review → better-code → code-revi
 
 ## 使用说明与边界
 
-- **适用环境**：Claude Code 插件。技能会使用当前会话可用的文件、终端和检索工具；调研、浏览器验证等任务需要对应工具支持。
-- **明确调用**：示例均为 `/better-code:<技能名>` 显式调用。Claude 也会根据技能描述自行判断何时加载；需要固定流程时直接调用更可靠。
+- **适用环境**：支持 Claude Code、Codex、GitHub Copilot、Gemini CLI、Kimi Code、Devin、Qoder、Cursor、Windsurf、Cline 等多种 Agent（详见 [docs/agent-portability.md](docs/agent-portability.md)）。技能会使用当前会话可用的文件、终端和检索工具；调研、浏览器验证等任务需要对应工具支持。
+- **明确调用**：示例均为 `/better-code:<技能名>` 显式调用。支持 `SKILL.md` 的 Agent 也会根据技能描述自行判断何时加载；需要固定流程时直接调用更可靠。
 - **它是约束，不是证明**：技能指导模型怎么实施、怎么自查。最终质量仍要由项目自己的测试、类型检查、构建和人工评审确认——一份说明不能当作「检查已通过」的证据。
-- **记忆需要接入**：经验默认写入 `docs/memory/index.md` 与独立主题文件。希望每次会话先读历史规则，需要把这条要求写进目标项目的 `CLAUDE.md`；本仓库的项目规则不会随安装自动生效。
+- **常驻约束与记忆**：Claude Code 与 Codex 插件会通过 `SessionStart` hook 自动注入 `AGENTS.md` 常驻约束；其他宿主通过各自的规则文件或项目根目录 `AGENTS.md` 生效。经验默认写入目标项目的 `docs/memory/index.md` 与独立主题文件。
 - **`wrap` 会动 Git**：验证通过后它会归档计划并提交，使用工作树时还涉及合并与清理。调用前明确任务范围和目标分支，远程推送另行授权。
-- **更新与卸载**：`claude plugin update better-code` 更新，`claude plugin uninstall better-code` 卸载。
+- **更新与卸载**：以 Claude Code 为例，`claude plugin update better-code` 更新，`claude plugin uninstall better-code` 卸载；其他宿主使用各自对应的插件管理命令。
 
 <details>
 <summary>工作流文档默认保存在哪里</summary>
@@ -183,13 +202,14 @@ git clone https://github.com/bb-boy680/better-code
 claude --plugin-dir ./better-code
 ```
 
-在仓库根目录校验结构：
+在仓库根目录校验插件结构与多宿主规则副本同步状态：
 
 ```bash
 claude plugin validate . --profile directory
+node scripts/agent-rule-copies.js
 ```
 
-插件描述位于 [.claude-plugin/plugin.json](.claude-plugin/plugin.json)，marketplace 配置位于 [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)，各技能入口为 `skills/<技能名>/SKILL.md`。
+插件描述位于 [.claude-plugin/plugin.json](.claude-plugin/plugin.json)（其他宿主清单与适配说明见 [docs/agent-portability.md](docs/agent-portability.md)），marketplace 配置位于 [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)，各技能入口为 `skills/<技能名>/SKILL.md`。
 
 ## License
 
