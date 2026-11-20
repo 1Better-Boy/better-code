@@ -27,7 +27,9 @@ argument-hint: "[计划文档路径] [worktree路径或分支名]"
 
 在当前有效工作区（若使用了 `worktree`，则在 `worktree` 内）将代码变更与计划归档一并或分步提交：
 
-1. **清理临时调试与生成噪音**：确认无残留调试块（如 `#region DEBUG`）、临时探针脚本、未使用的导入或无关格式化改动。
+1. **清理临时调试、噪音与未经批准的抑制逃生口**：
+   - 确认无残留调试块（如 `#region DEBUG`）、临时探针脚本、未使用的导入或无关格式化改动。
+   - 扫描本次新增 diff 是否夹带未经用户明确批准的 `@ts-ignore`、`@ts-expect-error`、`eslint-disable`、`# type: ignore`、`.skip` 或放宽 `tsconfig`/Lint 规则的门禁退化；若存在，必须先修复真实问题或获批后再封版。
 2. **严格检查 Diff 与凭证安全**：
    - 运行 `git status --short` 与 `git diff` / `git diff --cached` 逐项核对拟提交文件。
    - **安全红线**：确认不包含任何硬编码 API Key、Token、私钥、密码、连接字符串、`.env` 本地凭证或机器专用绝对路径。

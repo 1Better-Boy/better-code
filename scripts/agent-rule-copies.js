@@ -13,6 +13,7 @@ const root = path.resolve(__dirname, '..');
 const canonicalPath = path.join(root, 'AGENTS.md');
 
 const COPIES = [
+  { relPath: 'CLAUDE.md', header: [] },
   {
     relPath: '.cursor/rules/better-code.mdc',
     header: ['---', 'description: better-code 工程约束：高内聚、职责明确、可验证的改动边界。', 'globs:', 'alwaysApply: true', '---', ''],
